@@ -1,0 +1,44 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class HomePage extends JFrame implements ActionListener {
+
+    JButton bookButton;
+    public HomePage()
+    {
+        //Create a tittle for cinema
+        setTitle("IMPERIAL OASIS HOTEL");
+        setSize(640,360);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        //Create image icon logo
+        ImageIcon logo = new ImageIcon("Imperial Oasis.jpeg");
+        JLabel logoLabel = new JLabel(logo);
+        //Create a Panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        add(panel);
+        //Create Start Button
+        bookButton = new JButton("Book Your Hotel Here");
+        
+        bookButton.addActionListener(this);
+        
+        panel.add(bookButton, BorderLayout.SOUTH);
+        bookButton.setBounds(200, 250, 100, 40);
+        panel.add(logoLabel);
+        
+        setVisible(true);
+    }//end of constructor
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource() == bookButton) {
+            dispose();
+            new RoomSelection();
+        }//end of if
+    }//end of method
+
+    public static void main(String[] args)
+    {
+        HomePage wp=new HomePage();
+    }//end of main
+}//end of class
