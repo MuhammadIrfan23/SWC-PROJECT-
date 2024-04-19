@@ -1,0 +1,84 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class AddSelection extends JFrame implements ActionListener
+{
+    //Declaration Variables
+    JButton checkoutButton;
+    JCheckBox ThreeCourseMealCheckBox, ActivitiesCheckBox, ChiropracticTreatmentCheckBox;
+    JTextArea ticketTextArea;
+    String room,day,month,roomtype,time;
+    double totalPriceLuxury = 0.00, totalPriceStandard = 0.00, overallPrice = 0.00;
+    public AddSelection(String room, String time, int qtyLuxury,int qtyStandard, String day, String
+    month)
+    {
+        this.room = room;
+        this.day = day;
+        this.month = month;
+        this.roomtype = roomtype;
+        this.time = time;
+        
+        //calculate total price
+        totalPriceLuxury = qtyLuxury * 400;
+        totalPriceStandard = qtyStandard * 200;
+        overallPrice = totalPriceLuxury + totalPriceStandard;
+    
+        //Create Title
+        setTitle("AddSelection");
+        setSize(800, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        //Create Panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(8,11));
+        add(panel);
+        //Create Label 1
+        JLabel label1 = new JLabel("You have selected : " + room);
+        label1.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(label1);
+        //Create Label 2
+        JLabel label2 = new JLabel("You have selected a " + (
+                        "day") + " month");
+        label2.setFont(new Font("Arial", Font.BOLD, 16));
+        panel.add(label2);
+        //Create Label 3
+        JLabel label3 = new JLabel("Select Additional Items : ");
+        label3.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(label3);
+        //Create food box
+        ThreeCourseMealCheckBox = new JCheckBox("\nThreeCourseMeal (RM 100)");
+        ActivitiesCheckBox = new JCheckBox("Activities (RM 50)");
+        ChiropracticTreatmentCheckBox = new JCheckBox("ChiropracticTreatment (RM 70)");
+        panel.add(ThreeCourseMealCheckBox);
+        panel.add(ActivitiesCheckBox);
+        panel.add(ChiropracticTreatmentCheckBox);
+        //Create checkout button
+        checkoutButton = new JButton("Checkout");
+        checkoutButton.addActionListener(this);
+        panel.add(checkoutButton);
+        
+        setVisible(true);
+        // REGISTER LISTENER
+        ThreeCourseMealCheckBox.addActionListener(this);
+        ActivitiesCheckBox.addActionListener(this);
+        ChiropracticTreatmentCheckBox.addActionListener(this);
+    }//end of constructor
+    
+    public void actionPerformed(ActionEvent e)
+
+    {
+        if(e.getSource() == ThreeCourseMealCheckBox)
+            overallPrice += 100;
+        if(e.getSource() == ActivitiesCheckBox)
+            overallPrice  += 50;
+        if(e.getSource() == ChiropracticTreatmentCheckBox)
+            overallPrice  += 70;
+        if (e.getSource() == checkoutButton)
+        {
+            dispose();
+            new Receipt(room, day, month, overallPrice);
+        }//end of if
+        
+    }//end of method
+    
+}//end of class
