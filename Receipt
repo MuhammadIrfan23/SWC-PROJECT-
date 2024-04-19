@@ -1,0 +1,43 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class Receipt extends JFrame implements ActionListener
+{
+    public Receipt (String room, String day, String month, double totalPrice)
+    {
+        //Create receipt frame
+        setTitle("Receipt");
+        setSize(500, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        //Create Panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        add(panel);
+        //Create Label
+        JLabel label = new JLabel(new ImageIcon("accorhotels.jpeg"));
+        panel.add(label, BorderLayout.NORTH);
+        //Create receipt text area
+        JTextArea receiptTextArea = new JTextArea("Room : " + room + "\n" +
+                "Day : " + day + "\n" + "Month: " + month + "\n" + "Total Price : RM" +
+                totalPrice);
+        receiptTextArea.setEditable(true);
+        receiptTextArea.setEditable(false);
+        receiptTextArea.setBackground(Color.WHITE);
+        receiptTextArea.setFont(new Font("Arial", Font.PLAIN, 16));
+        panel.add(receiptTextArea, BorderLayout.CENTER);
+        receiptTextArea.append(String.format(" \n\n\n "));
+        receiptTextArea.append(String.format("Thank you and have a nice dayyy!!"));
+        receiptTextArea.append(String.format(" \n "));
+        receiptTextArea.append(String.format(" Please Enjoy Your Stay!!!"));
+        //Create close button
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(this);
+        panel.add(closeButton, BorderLayout.SOUTH);
+        setVisible(true);
+    }//end of constructor
+    public void actionPerformed(ActionEvent e)
+    { 
+        dispose();
+    }//end of method
+}
